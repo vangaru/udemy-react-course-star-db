@@ -1,24 +1,26 @@
 import React, {useEffect, useState} from "react";
-
 import SwapiService from "../../swapi-service";
-
+import Spinner from "../spinner";
 import './RandomPlanet.css';
 
 const RandomPlanet = () => {
     const [planet, setPlanet] = useState({});
     const [planetImageSrc, setPlanetImageSrc] = useState('');
+    const [loading, setLoading] = useState(true);
 
     const swapiService = new SwapiService();
+    const minPlanetId = 2;
+    const maxPlanetId = 18;
 
     const updatePlanet = () => {
-        const planetId = Math.floor(Math.random() * 25 + 2);
+        const planetId = Math.floor(Math.random() * maxPlanetId + minPlanetId);
         swapiService
             .getPlanet(planetId)
             .then((planet) => {
                 setPlanet(planet);
                 setPlanetImageSrc(`https://starwars-visualguide.com/assets/img/planets/${planetId}.jpg`);
-            });
-        console.log(planetId);
+            })
+        setLoading(false);
     }
 
     useEffect((() => {
@@ -27,6 +29,22 @@ const RandomPlanet = () => {
 
     return (
         <div className="random-planet bg-dark p-4">
+            { loading ? <SpinnerView /> : <PlanetView planet={ planet } planetImageSrc={ planetImageSrc }/> }
+        </div>
+    );
+}
+
+const SpinnerView = () => {
+    return (
+        <div className="spinner-view">
+            <Spinner />
+        </div>
+    );
+}
+
+const PlanetView = ( { planet, planetImageSrc } ) => {
+    return (
+        <React.Fragment>
             <div className="row">
                 <div className="col">
                     <h3>{planet.name}</h3>
@@ -51,7 +69,7 @@ const RandomPlanet = () => {
                     </ul>
                 </div>
             </div>
-        </div>
+        </React.Fragment>
     );
 }
 
