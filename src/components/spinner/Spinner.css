@@ -2,6 +2,7 @@
     0% { transform: rotate(0) }
     100% { transform: rotate(360deg) }
 }
+.spinner { text-align: center }
 .ldio-1r6ac0innc3 div { box-sizing: border-box!important }
 .ldio-1r6ac0innc3 > div {
     position: absolute;

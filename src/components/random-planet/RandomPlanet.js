@@ -2,15 +2,22 @@ import React, {useEffect, useState} from "react";
 import SwapiService from "../../swapi-service";
 import Spinner from "../spinner";
 import './RandomPlanet.css';
+import ErrorIndicator from "../error-indicator";
 
 const RandomPlanet = () => {
     const [planet, setPlanet] = useState({});
     const [planetImageSrc, setPlanetImageSrc] = useState('');
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     const swapiService = new SwapiService();
     const minPlanetId = 2;
     const maxPlanetId = 18;
+
+    const onError = () => {
+        setError(true);
+        setLoading(false);
+    }
 
     const updatePlanet = () => {
         const planetId = Math.floor(Math.random() * maxPlanetId + minPlanetId);
@@ -19,17 +26,26 @@ const RandomPlanet = () => {
             .then((planet) => {
                 setPlanet(planet);
                 setPlanetImageSrc(`https://starwars-visualguide.com/assets/img/planets/${planetId}.jpg`);
+                setLoading(false);
             })
-        setLoading(false);
+            .catch(onError);
     }
 
     useEffect((() => {
         updatePlanet();
     }), []);
 
+    const hasData = !(loading || error);
+
+    const errorIndicator = error ? <ErrorIndicator /> : null;
+    const spinner = loading ? <Spinner /> : null;
+    const content = hasData ? <PlanetView planet={planet} planetImageSrc={planetImageSrc} /> : null;
+
     return (
         <div className="random-planet bg-dark p-4">
-            { loading ? <SpinnerView /> : <PlanetView planet={ planet } planetImageSrc={ planetImageSrc }/> }
+            {errorIndicator}
+            {spinner}
+            {content}
         </div>
     );
 }
