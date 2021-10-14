@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 
 import Header from "../header";
@@ -7,16 +7,22 @@ import ItemList from "../item-list";
 import PersonDetails from "../person-details";
 
 const App = () => {
+    const [selectedPersonId, setSelectedPersonId] = useState(1);
+
+    const onPersonSelected = (id) => {
+        setSelectedPersonId(id);
+    }
+
     return (
-        <div className="App">
+        <div className="App mb-5">
             <Header />
             <RandomPlanet />
             <div className="row">
                 <div className="col-md-6 mt-4">
-                    <ItemList />
+                    <ItemList onItemSelected={onPersonSelected} />
                 </div>
                 <div className="col-md-6 mt-4">
-                    <PersonDetails />
+                    <PersonDetails personId={selectedPersonId} />
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@ import ErrorIndicator from "../error-indicator";
 import "./ItemList.css";
 import SwapiService from "../../swapi-service";
 
-const ItemList = () => {
+const ItemList = ( {onItemSelected} ) => {
     const [itemList, setItemList] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -31,7 +31,7 @@ const ItemList = () => {
 
     const errorIndicator = error ? <ErrorIndicator /> : null;
     const spinner = loading ? <Spinner /> : null;
-    const content = hasData ? <ItemListView people={itemList} /> : null;
+    const content = hasData ? <ItemListView people={itemList} onItemSelected={onItemSelected} /> : null;
 
     return (
         <React.Fragment>
@@ -42,18 +42,23 @@ const ItemList = () => {
     );
 }
 
-const ItemListView = ( { people } ) => {
+const ItemListView = ( { people, onItemSelected } ) => {
+    const renderItems = (items) => {
+        return items.map(({id, name}) => renderItem(id, name));
+    }
+
+    const renderItem = (id, name) => {
+        return (
+            <li className="list-group-item"
+                key={id} onClick={ () => onItemSelected(id) }>
+                {name}
+            </li>
+        );
+    }
+
     return (
         <ul className="item-list list-group">
-            <li className="list-group-item">
-                <h5>Luke Skywalker</h5>
-            </li>
-            <li className="list-group-item">
-                <h5>Darth Vader</h5>
-            </li>
-            <li className="list-group-item">
-                <h5>R2-D2</h5>
-            </li>
+            { renderItems(people) }
         </ul>
     );
 }
