@@ -14,9 +14,10 @@ const RandomPlanet = () => {
     const minPlanetId = 2;
     const maxPlanetId = 18;
 
-    const onError = () => {
+    const onError = (err) => {
         setError(true);
         setLoading(false);
+        console.error(err);
     }
 
     const updatePlanet = () => {
@@ -33,6 +34,7 @@ const RandomPlanet = () => {
 
     useEffect((() => {
         updatePlanet();
+        setInterval(updatePlanet, 5000);
     }), []);
 
     const hasData = !(loading || error);
