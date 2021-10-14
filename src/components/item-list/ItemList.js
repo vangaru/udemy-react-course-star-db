@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
-import "./ItemList.css";
+import ItemListView from "../item-list-view";
 import SwapiService from "../../swapi-service";
+import "./ItemList.css";
 
 const ItemList = ( {onItemSelected} ) => {
     const [itemList, setItemList] = useState(null);
@@ -39,27 +40,6 @@ const ItemList = ( {onItemSelected} ) => {
             {spinner}
             {content}
         </React.Fragment>
-    );
-}
-
-const ItemListView = ( { people, onItemSelected } ) => {
-    const renderItems = (items) => {
-        return items.map(({id, name}) => renderItem(id, name));
-    }
-
-    const renderItem = (id, name) => {
-        return (
-            <li className="list-group-item"
-                key={id} onClick={ () => onItemSelected(id) }>
-                {name}
-            </li>
-        );
-    }
-
-    return (
-        <ul className="item-list list-group">
-            { renderItems(people) }
-        </ul>
     );
 }
 
