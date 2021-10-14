@@ -50,14 +50,6 @@ const RandomPlanet = () => {
     );
 }
 
-const SpinnerView = () => {
-    return (
-        <div className="spinner-view">
-            <Spinner />
-        </div>
-    );
-}
-
 const PlanetView = ( { planet, planetImageSrc } ) => {
     return (
         <React.Fragment>
