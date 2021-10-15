@@ -1,8 +1,9 @@
 import React from "react";
+import "./PlanetView.css";
 
 const PlanetView = ( { planet, planetImageSrc } ) => {
     return (
-        <React.Fragment>
+        <div className="planet-view spinner-view bg-dark p-4">
             <div className="row">
                 <div className="col">
                     <h3>{planet.name}</h3>
@@ -27,7 +28,7 @@ const PlanetView = ( { planet, planetImageSrc } ) => {
                     </ul>
                 </div>
             </div>
-        </React.Fragment>
+        </div>
     );
 }
 

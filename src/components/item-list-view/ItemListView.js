@@ -1,6 +1,6 @@
 import React from "react";
 
-const ItemListView = ( { people, onItemSelected } ) => {
+const ItemListView = ( { items, onItemSelected } ) => {
     const renderItems = (items) => {
         return items.map(({id, name}) => renderItem(id, name));
     }
@@ -16,7 +16,7 @@ const ItemListView = ( { people, onItemSelected } ) => {
 
     return (
         <ul className="item-list list-group">
-            { renderItems(people) }
+            { renderItems(items) }
         </ul>
     );
 }

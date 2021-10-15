@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from "react";
-
 import './PersonDetails.css';
 import SwapiService from "../../swapi-service";
-import Spinner from "../spinner";
-import ErrorIndicator from "../error-indicator";
 import PersonView from "../person-view";
+import ResultView from "../swapi-item-result-view";
 
 const PersonDetails = ( { personId } ) => {
     const [person, setPerson] = useState(null);
@@ -36,18 +34,10 @@ const PersonDetails = ( { personId } ) => {
         updatePerson();
     }, [personId]);
 
-    const hasData = !(loading || error);
-
-    const errorIndicator = error ? <ErrorIndicator /> : null;
-    const spinner = loading ? <Spinner /> : null;
-    const content = hasData ? <PersonView person={person} personImageSrc={personImageSrc} /> : null;
+    const view = <PersonView person={person} personImageSrc={personImageSrc} />;
 
     return(
-        <React.Fragment>
-            {errorIndicator}
-            {spinner}
-            {content}
-        </React.Fragment>
+        <ResultView view={view} loading={loading} error={error} />
     );
 }
 

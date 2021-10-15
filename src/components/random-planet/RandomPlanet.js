@@ -4,6 +4,7 @@ import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 import PlanetView from "../planet-view";
 import './RandomPlanet.css';
+import ResultView from "../swapi-item-result-view";
 
 const RandomPlanet = () => {
     const [planet, setPlanet] = useState({});
@@ -40,18 +41,10 @@ const RandomPlanet = () => {
         return () => clearInterval(interval);
     }), []);
 
-    const hasData = !(loading || error);
-
-    const errorIndicator = error ? <ErrorIndicator /> : null;
-    const spinner = loading ? <Spinner /> : null;
-    const content = hasData ? <PlanetView planet={planet} planetImageSrc={planetImageSrc} /> : null;
+    const view = <PlanetView planet={planet} planetImageSrc={planetImageSrc} />
 
     return (
-        <div className="random-planet bg-dark p-4">
-            {errorIndicator}
-            {spinner}
-            {content}
-        </div>
+        <ResultView view={view} error={error} loading={loading} />
     );
 }
 
