@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from "react";
 import ItemListView from "../item-list-view";
-import SwapiService from "../../swapi-service";
 import "./ItemList.css";
 import ResultView from "../result-view";
 
-const ItemList = ( { onItemSelected } ) => {
+const ItemList = ( { onItemSelected, getItems } ) => {
     const [itemList, setItemList] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-
-   const swapiService = new SwapiService();
 
     const onError = (err) => {
         setError(true);
@@ -18,8 +15,7 @@ const ItemList = ( { onItemSelected } ) => {
     }
 
     useEffect(() => {
-        swapiService
-            .getAllPeople()
+        getItems()
             .then((peopleList) => {
                 setItemList(peopleList);
                 setLoading(false);
