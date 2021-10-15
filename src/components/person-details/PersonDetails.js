@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import './PersonDetails.css';
 import SwapiService from "../../swapi-service";
 import PersonView from "../person-view";
-import ResultView from "../swapi-item-result-view";
+import ResultView from "../result-view";
 
 const PersonDetails = ( { personId } ) => {
     const [person, setPerson] = useState(null);

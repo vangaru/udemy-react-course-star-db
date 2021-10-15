@@ -4,7 +4,7 @@ import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 import PlanetView from "../planet-view";
 import './RandomPlanet.css';
-import ResultView from "../swapi-item-result-view";
+import ResultView from "../result-view";
 
 const RandomPlanet = () => {
     const [planet, setPlanet] = useState({});

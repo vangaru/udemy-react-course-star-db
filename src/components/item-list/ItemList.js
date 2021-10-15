@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import ItemListView from "../item-list-view";
 import SwapiService from "../../swapi-service";
 import "./ItemList.css";
-import ResultView from "../swapi-item-result-view";
+import ResultView from "../result-view";
 
 const ItemList = ( { onItemSelected } ) => {
     const [itemList, setItemList] = useState(null);
