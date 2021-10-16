@@ -3,7 +3,7 @@ import ItemListView from "../item-list-view";
 import "./ItemList.css";
 import ResultView from "../result-view";
 
-const ItemList = ( { onItemSelected, getItems } ) => {
+const ItemList = ( { onItemSelected, getItems, renderListItem } ) => {
     const [itemList, setItemList] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -23,7 +23,10 @@ const ItemList = ( { onItemSelected, getItems } ) => {
             .catch(onError);
     }, []);
 
-    const view = <ItemListView items={itemList} onItemSelected={onItemSelected} />;
+    const view = <ItemListView
+        items={itemList}
+        onItemSelected={onItemSelected}
+        render={(item) => renderListItem(item)} />;
 
     return (
         <ResultView view={view} error={error} loading={loading} />

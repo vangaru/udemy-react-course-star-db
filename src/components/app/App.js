@@ -22,26 +22,38 @@ const App = () => {
             <Header />
             <RandomPlanet />
             <div className="row">
-                <div className="col-md-6 mt-4">
-                    <ItemList onItemSelected={onPersonSelected} getItems={() => swapiService.getAllPeople()} />
+                <div className="col-md-4 mt-4">
+                    <ItemList
+                        onItemSelected={onPersonSelected}
+                        getItems={() => swapiService.getAllPeople()}
+                        renderListItem={(item) => `${item.name} (${item.birthYear}, ${item.gender})`}
+                    />
                 </div>
-                <div className="col-md-6 mt-4">
+                <div className="col-md-8 mt-4">
                     <PersonDetails personId={selectedPersonId} />
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-6 mt-4">
-                    <ItemList onItemSelected={null} getItems={() => swapiService.getAllPlanets()} />
+                <div className="col-md-4 mt-4">
+                    <ItemList
+                        onItemSelected={null}
+                        getItems={() => swapiService.getAllPlanets()}
+                        renderListItem={(item) => `${item.name} (diameter: ${item.diameter})`}
+                    />
                 </div>
-                <div className="col-md-6 mt-4">
+                <div className="col-md-8 mt-4">
                     <Spinner />
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-6 mt-4">
-                    <ItemList onItemSelected={null} getItems={() => swapiService.getAllStarships()} />
+                <div className="col-md-4 mt-4">
+                    <ItemList
+                        onItemSelected={null}
+                        getItems={() => swapiService.getAllStarships()}
+                        renderListItem={(item) => `${item.name} (${item.model})`}
+                    />
                 </div>
-                <div className="col-md-6 mt-4">
+                <div className="col-md-8 mt-4">
                     <Spinner />
                 </div>
             </div>

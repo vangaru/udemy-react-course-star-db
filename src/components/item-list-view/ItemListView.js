@@ -1,15 +1,15 @@
 import React from "react";
 
-const ItemListView = ( { items, onItemSelected } ) => {
+const ItemListView = ( { items, onItemSelected, render } ) => {
     const renderItems = (items) => {
-        return items.map(({id, name}) => renderItem(id, name));
+        return items.map((item) => renderItem(item));
     }
 
-    const renderItem = (id, name) => {
+    const renderItem = (item) => {
         return (
             <li className="list-group-item"
-                key={id} onClick={ () => onItemSelected(id) }>
-                {name}
+                key={item.id} onClick={ () => onItemSelected(item.id) }>
+                {render(item)}
             </li>
         );
     }
