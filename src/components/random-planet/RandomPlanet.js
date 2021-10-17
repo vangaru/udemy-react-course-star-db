@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from "react";
 import SwapiService from "../../swapi-service";
-import Spinner from "../spinner";
-import ErrorIndicator from "../error-indicator";
-import PlanetView from "../planet-view";
 import './RandomPlanet.css';
 import ResultView from "../result-view";
+import ItemView from "../item-view";
 
-const RandomPlanet = () => {
+const RandomPlanet = ( { renderPlanetDetails } ) => {
     const [planet, setPlanet] = useState({});
     const [planetImageSrc, setPlanetImageSrc] = useState('');
     const [loading, setLoading] = useState(true);
@@ -41,7 +39,7 @@ const RandomPlanet = () => {
         return () => clearInterval(interval);
     }), []);
 
-    const view = <PlanetView planet={planet} planetImageSrc={planetImageSrc} />
+    const view = <ItemView item={planet} itemImageSrc={planetImageSrc} renderItemDetails={renderPlanetDetails} />
 
     return (
         <ResultView view={view} error={error} loading={loading} />

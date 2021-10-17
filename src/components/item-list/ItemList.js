@@ -16,8 +16,8 @@ const ItemList = ( { onItemSelected, getItems, renderListItem } ) => {
 
     useEffect(() => {
         getItems()
-            .then((peopleList) => {
-                setItemList(peopleList);
+            .then((itemList) => {
+                setItemList(itemList);
                 setLoading(false);
             })
             .catch(onError);
